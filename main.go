@@ -20,7 +20,6 @@ const TIMEOUT = 20
 var CA, _ = user.Current()
 var outdir = flag.String("d", CA.HomeDir+"/Downloads/Bing Wallpapers", "Directory to store wallpapers.")
 var number = flag.String("n", "1", "Number of wallpapers to download.")
-var language = flag.String("l", "zh-CN", "The language of wallpapers' name")
 
 func check(err error) {
 	if err != nil {
@@ -40,7 +39,7 @@ func main() {
 		}
 	}
 
-	api := get_api_json(*number, *language)
+	api := get_api_json(*number)
 	const wp_url_base = "http://www.bing.com"
 	for _, image := range api.Images {
 		url := wp_url_base + image.Url
@@ -58,8 +57,8 @@ type API struct {
 	} `json:"images"`
 }
 
-func get_api_json(number, lang string) (api *API) {
-	var ajaxAPI = fmt.Sprintf("http://www.bing.com/HPImageArchive.aspx?format=js&mkt=%v&n=%v", lang, number)
+func get_api_json(number string) (api *API) {
+	var ajaxAPI = fmt.Sprintf("http://www.bing.com/HPImageArchive.aspx?format=js&n=%v", number)
 
 	c := &http.Client{
 		Timeout: TIMEOUT * time.Second,

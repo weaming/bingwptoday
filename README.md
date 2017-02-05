@@ -11,7 +11,5 @@ Get the bing.com wallpaper of today
     Usage of bingwptoday:
       -d string
             Directory to store wallpapers. (default "~/Downloads/Bing Wallpapers")
-      -l string
-            The language of wallpapers' name (default "zh-CN")
       -n string
             Number of wallpapers to download. (default "1")
