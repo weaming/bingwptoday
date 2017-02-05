@@ -18,7 +18,7 @@ import (
 const TIMEOUT = 20
 
 var CA, _ = user.Current()
-var outdir = flag.String("d", CA.HomeDir+"/Downloads/Bing Wallpapers", "Directory to store wallpapers.")
+var outdir = flag.String("d", CA.HomeDir+"/Downloads/BingWallpapers", "Directory to store wallpapers.")
 var number = flag.String("n", "1", "Number of wallpapers to download.")
 
 func check(err error) {
@@ -93,10 +93,10 @@ func downloadImage(url, out string) {
 	}()
 
 	if _, err := os.Stat(out); err == nil {
-		log.Printf("Ignore existed: %v => %v\n", url, out)
+		log.Printf("Ignore existed: %v \n\t\t=> %v\n\n", url, out)
 		return
 	} else {
-		log.Printf("%v => %v\n", url, out)
+		log.Printf("%v \n\t\t=> %v\n\n", url, out)
 	}
 
 	c := &http.Client{
