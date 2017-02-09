@@ -3,7 +3,7 @@
 Get the bing.com wallpaper of today
 
     go get github.com/weaming/bingwptoday
-    bingwptoday -n 3 -l "en-US"
+    bingwptoday -n 3
 
 ## Usage
 
