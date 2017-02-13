@@ -20,6 +20,7 @@ const TIMEOUT = 20
 var CA, _ = user.Current()
 var outdir = flag.String("d", CA.HomeDir+"/Downloads/BingWallpapers", "Directory to store wallpapers.")
 var number = flag.String("n", "1", "Number of wallpapers to download.")
+var timestamp = flag.Bool("t", false, "Whether add timestamp in picture name.")
 
 func check(err error) {
 	if err != nil {
@@ -44,7 +45,11 @@ func main() {
 	for _, image := range api.Images {
 		url := wp_url_base + image.Url
 		name := strings.SplitN(image.CopyRight, " (©", 2)[0] + fp.Ext(image.Url)
-		downloadImage(url, fp.Join(*outdir, name))
+		if *timestamp {
+			downloadImage(url, fp.Join(*outdir, time.Now().Format("20060102-")+name))
+		} else {
+			downloadImage(url, fp.Join(*outdir, name))
+		}
 	}
 }
 
