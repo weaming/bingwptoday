@@ -45,6 +45,9 @@ func main() {
 	for _, image := range api.Images {
 		url := wp_url_base + image.Url
 		name := strings.SplitN(image.CopyRight, " (©", 2)[0] + fp.Ext(image.Url)
+		name = strings.Replace(name, "/", "-", -1)
+		name = strings.Replace(name, `\`, "-", -1)
+		fmt.Println(name)
 		if *timestamp {
 			downloadImage(url, fp.Join(*outdir, time.Now().Format("20060102-")+name))
 		} else {
