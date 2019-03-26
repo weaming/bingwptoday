@@ -44,8 +44,15 @@ func main() {
 	const wp_url_base = "http://www.bing.com"
 	for _, image := range api.Images {
 		url := wp_url_base + image.Url
-		name := strings.SplitN(image.CopyRight, " (©", 2)[0] + fp.Ext(image.Url)
+		ext := fp.Ext(image.Url)
+		if strings.Contains(ext, ".jpg") {
+			ext = ".jpg"
+		} else {
+			ext = ".png"
+		}
+		name := strings.SplitN(image.CopyRight, " (©", 2)[0] + ext
 		name = strings.Replace(name, "/", "-", -1)
+		name = strings.Replace(name, `\`, "-", -1)
 		name = strings.Replace(name, `\`, "-", -1)
 		fmt.Println(name)
 		if *timestamp {
